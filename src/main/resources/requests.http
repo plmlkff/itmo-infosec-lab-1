@@ -1,0 +1,10 @@
+POST http://localhost:8080/auth/sign-up
+Content-Type: application/json
+Accept: */*
+
+{
+  "login": "test",
+  "password": "123456",
+  "firstName": "Paul",
+  "surname": "Malkov"
+}

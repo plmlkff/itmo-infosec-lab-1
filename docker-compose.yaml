@@ -1,0 +1,17 @@
+networks:
+  back:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:17
+    networks:
+      - back
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    healthcheck:
+      start_period: 1s
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
