@@ -32,23 +32,14 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/sign-up").permitAll()
                                 .anyRequest().authenticated()
                 ).exceptionHandling(configurer ->
-                        configurer.authenticationEntryPoint(
-                                        (request, response, exception) -> {
-                                            response.setStatus(
-                                                    HttpStatus.UNAUTHORIZED
-                                                            .value()
-                                            );
-                                            response.getWriter()
-                                                    .write("Unauthorized");
-                                        })
-                                .accessDeniedHandler(
+                        configurer.accessDeniedHandler(
                                         (request, response, exception) -> {
                                             response.setStatus(
                                                     HttpStatus.FORBIDDEN
                                                             .value()
                                             );
                                             response.getWriter()
-                                                    .write("Forbidden.");
+                                                    .write(exception.getMessage());
                                         }))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

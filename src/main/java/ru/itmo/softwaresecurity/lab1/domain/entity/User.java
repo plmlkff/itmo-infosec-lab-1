@@ -55,5 +55,4 @@ public class User {
             fetch = FetchType.LAZY
     )
     private Set<Post> posts;
-
 }

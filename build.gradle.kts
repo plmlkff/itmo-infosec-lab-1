@@ -16,6 +16,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.4.3")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("io.vavr:vavr:0.10.5")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     runtimeOnly("org.postgresql:postgresql")

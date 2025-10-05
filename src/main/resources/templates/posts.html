@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+<body>
+<h1>Posts</h1>
+
+<div th:if="${posts.empty}">
+    <p>No posts available.</p>
+</div>
+
+<div th:each="post : ${posts}" style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc;">
+    <h2 th:text="${post.name}">Post Title</h2>
+    <p><strong>Subject:</strong> <span th:text="${post.subject}">Post Subject</span></p>
+    <p th:text="${post.body}">Post content goes here...</p>
+    <p><strong>Author:</strong>
+        <span th:text="${post.owner.firstName + ' ' + post.owner.surname}">Author Name</span>
+    </p>
+</div>
+</body>
+</html>
