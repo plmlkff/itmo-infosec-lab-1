@@ -1,7 +1,11 @@
+import com.github.spotbugs.snom.Confidence
+
 plugins {
     id("java")
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.github.spotbugs") version "6.0.7"
+    id("org.owasp.dependencycheck") version "12.1.6"
 }
 
 group = "ru.itmo"
@@ -24,6 +28,44 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+    spotbugs("com.github.spotbugs:spotbugs:4.8.3")
+    spotbugsPlugins("com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0")
+
+    // Test dependencies
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.security:spring-security-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+spotbugs {
+    toolVersion.set("4.8.3")
+    ignoreFailures.set(false)
+    showStackTraces.set(false)
+    reportLevel.set(Confidence.HIGH)
+}
+
+dependencyCheck {
+    format = "HTML"
+
+    // Только критические уязвимости
+    failBuildOnCVSS = 9.0f // Только CRITICAL уязвимости (CVSS 9.0-10.0)
+    nvd{
+        apiKey=System.getenv("NVD_API_KEY")
+    }
+
+    analyzers {
+        assemblyEnabled = false           // .NET сборки
+        nugetconfEnabled = false          // NuGet конфиги
+        nuspecEnabled = false             // NuGet спецификации
+        centralEnabled = false            // Maven Central (используйте для Maven)
+        nexusEnabled = false              // Nexus
+        pyDistributionEnabled = false     // Python дистрибутивы
+        pyPackageEnabled = false          // Python пакеты
+        rubygemsEnabled = false           // Ruby gems
+        cocoapodsEnabled = false          // CocoaPods
+        swiftEnabled = false              // Swift
+        archiveEnabled = true             // Оставляем для JAR
+    }
 }
 
 tasks.test {
