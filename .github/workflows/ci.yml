@@ -45,8 +45,8 @@ jobs:
     - name: Report of Dependency Check
       uses: actions/upload-artifact@v4
       with:
-        name: dependency-check-report
-        path: target/dependency-check-report.html
+        name: security-reports
+        path: build/reports/
 
   build:
     runs-on: ubuntu-latest
@@ -62,6 +62,5 @@ jobs:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-          ~/build/reports/spotbugs
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
     - run: ./gradlew clean build -x test
