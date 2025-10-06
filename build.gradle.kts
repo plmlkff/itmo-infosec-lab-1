@@ -2,7 +2,7 @@ import com.github.spotbugs.snom.Confidence
 
 plugins {
     id("java")
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "3.5.6"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.0.7"
     id("org.owasp.dependencycheck") version "12.1.6"
@@ -48,23 +48,23 @@ dependencyCheck {
     format = "HTML"
 
     // Только критические уязвимости
-    failBuildOnCVSS = 9.0f // Только CRITICAL уязвимости (CVSS 9.0-10.0)
+    failBuildOnCVSS = 9.0f
     nvd{
         apiKey=System.getenv("NVD_API_KEY")
     }
 
     analyzers {
-        assemblyEnabled = false           // .NET сборки
-        nugetconfEnabled = false          // NuGet конфиги
-        nuspecEnabled = false             // NuGet спецификации
-        centralEnabled = false            // Maven Central (используйте для Maven)
-        nexusEnabled = false              // Nexus
-        pyDistributionEnabled = false     // Python дистрибутивы
-        pyPackageEnabled = false          // Python пакеты
-        rubygemsEnabled = false           // Ruby gems
-        cocoapodsEnabled = false          // CocoaPods
-        swiftEnabled = false              // Swift
-        archiveEnabled = true             // Оставляем для JAR
+        assemblyEnabled = false
+        nugetconfEnabled = false
+        nuspecEnabled = false
+        centralEnabled = false
+        nexusEnabled = false
+        pyDistributionEnabled = false
+        pyPackageEnabled = false
+        rubygemsEnabled = false
+        cocoapodsEnabled = false
+        swiftEnabled = false
+        archiveEnabled = true
     }
 }
 
